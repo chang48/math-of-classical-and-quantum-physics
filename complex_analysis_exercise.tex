@@ -1,0 +1,241 @@
+\documentclass[10pt, letterpaper]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\input{MyCommand}
+
+\setlength{\topmargin}{-2cm}
+\setlength{\oddsidemargin}{-0.3cm}
+\setlength{\textheight}{23cm}
+\setlength{\textwidth}{17cm}
+\newtheorem{thm}{Theorem}
+
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+%\newcommand{\dfrac}[2]{\displaystyle\frac{#1}{#2}}
+
+\begin{document}
+
+\noindent
+{\bf Exercises}
+\begin{itemize}
+	% --------------------------------------------------------------------------
+	\item Ex. 1: 
+
+	Define $u(x,y)$ and $v(x,y)$ as
+	\be
+		f(z) = \frac{xy^2(x+iy)}{x^2+y^2} = \frac{x^2y^2}{x^2+y^2} + i\frac{xy^3}{x^2+y^2} \equiv u(x,y) + iv(x,y),
+	\ee
+	where $z=x+iy$. By definition $z\neq 0$ and $f(0)=0$. It follows that
+	\begin{align}
+		\frac{\partial u}{\partial x} &= \frac{2xy^4}{(x^2+y^2)^2}, \nonumber\\
+		\frac{\partial v}{\partial y} &= \frac{3x^3y^2+xy^4}{(x^2+y^2)^2}, \nonumber\\
+		\frac{\partial u}{\partial y} &= \frac{2x^4y}{(x^2+y^2)^4}, \nonumber\\
+		\frac{\partial v}{\partial x} &= \frac{y^5 - x^2y^3}{(x^2+y^2)^2}. \nonumber
+	\end{align}
+	Note that since $z\neq 0$ (i.e. $x$ and $y$ cannot be zero simultaneously), the denominators of the partial
+	derivatives are all well defined. In order to satisfy the Cauchy-Riemann conditions, we only need to examine
+	the numerators.
+	\begin{itemize}
+		\item Along the real-axis, $y=0$: In this case, $\partial u/\partial x = \partial v/\partial y=0$;
+		$\partial u/\partial y = -\partial v/\partial x=0$. As a result, $f(z)$ is analytic and differentiable
+		along the real-axis except $z=0$.
+		\item Along the imaginary-axis, $x=0$: $\partial u/\partial x = \partial v/\partial y=0$. However,
+		$\partial u/\partial y=0$, $-\partial v/\partial x = -y$. Therefore, $f(z)$ is not analytic nor differentiable
+		on the imaginary-axis.
+		\item For any $x, \,y\neq 0$, in order to satisfy the Cauchy-Riemann condition, we need to have
+		\begin{align}
+			2xy^4 &= 3x^3y^2 + xy^4, \label{eq:1}\\
+			2x^4y &= x^2y^3 - y^5. \label{eq:2}
+		\end{align}
+		The first condition leads to $y^2 = 3x^2$. By substituting this identity into Eq.~(\ref{eq:2}), we get:
+		\be
+			x^4=0,
+		\ee
+		which contradicts to the condition that $x,\,y\neq 0$. Thus, $f(z)$ is not analytic nor differentiable
+		for any finite $(x, y)$.
+	\end{itemize}
+
+
+	% --------------------------------------------------------------------------
+	\item Ex. 6: 
+
+	Given the definition $z=x+iy=re^{i\theta}$, we have $x=r\cos\theta$ and $y=r\sin\theta$.
+	This transformation leads to
+	\begin{align}
+		\pd{x}{r} &= \cos\theta,\,\,\,\,\,\pd{x}{\theta}=-r\sin\theta,\nonumber\\
+		\pd{y}{r} &= \sin\theta,\,\,\,\,\,\pd{y}{\theta}=r\cos\theta. \nonumber
+	\end{align}
+	It follows that
+	\begin{align}
+		\pd{u}{x} &= \pd{u}{r}\pd{r}{x} + \pd{u}{\theta}\pd{\theta}{x} 
+		           = \frac{1}{\cos\theta}\pd{u}{r} - \frac{1}{r\sin\theta}\pd{u}{\theta},\nonumber\\
+		\pd{v}{y} &= \pd{v}{r}\pd{r}{y} + \pd{v}{\theta}\pd{\theta}{y}
+		           = \frac{1}{\sin\theta}\pd{v}{r} + \frac{1}{r\cos\theta}\pd{v}{\theta},\nonumber\\
+		\pd{u}{y} &= \pd{u}{r}\pd{r}{y} + \pd{u}{\theta}\pd{\theta}{y}
+		           = \frac{1}{\sin\theta}\pd{u}{r} + \frac{1}{r\cos\theta}\pd{u}{\theta},\nonumber\\
+		\pd{v}{x} &= \pd{v}{r}\pd{r}{x} + \pd{v}{\theta}\pd{\theta}{x} 
+		           = \frac{1}{\cos\theta}\pd{v}{r} - \frac{1}{r\sin\theta}\pd{v}{\theta}.\nonumber
+	\end{align}
+	With the above identities, the usual Cauchy-Riemann conditions in Cartesian coordinates
+	\begin{align}
+		\pd{u}{x} &= \pd{v}{y}, \nonumber\\
+		\pd{v}{x} &= -\pd{u}{y},\nonumber
+	\end{align}
+	translate to
+	\begin{align}
+		\frac{1}{\cos\theta}\pd{u}{r} - \frac{1}{r\sin\theta}\pd{u}{\theta} &=
+			\frac{1}{\sin\theta}\pd{v}{r} + \frac{1}{r\cos\theta}\pd{v}{\theta}, \label{eq:CR1}\\
+		\frac{1}{\sin\theta}\pd{u}{r} + \frac{1}{r\cos\theta}\pd{u}{\theta} &=
+			-\frac{1}{\cos\theta}\pd{v}{r} + \frac{1}{r\sin\theta}\pd{v}{\theta}. \label{eq:CR2}
+	\end{align}
+	Now, Eq.~(\ref{eq:CR1})$\times\sin\theta$ $-$ Eq.~(\ref{eq:CR2})$\times\cos\theta$ gives
+	\be
+		\pd{u}{r} = \frac{1}{r}\pd{v}{\theta}.
+	\ee
+	Similarly, Eq.~(\ref{eq:CR1})$\times\cos\theta$ $-$ Eq.~(\ref{eq:CR2})$\times\sin\theta$ leads to
+	\be
+		\pd{v}{r} = -\frac{1}{r}\pd{u}{\theta}.
+	\ee
+
+	% --------------------------------------------------------------------------
+	\item Ex. 7:
+
+	Firstly, let's write $z=re^{i\theta}$. 
+	\begin{enumerate}
+		\item $\log z$:
+
+		With the definition of $z$ in polar form, we have
+		\be
+			\log z = \log r + i\theta \equiv u(r, \theta) + iv(r, \theta). \nonumber
+		\ee
+		It is straightforward to show that
+		\begin{align}
+			\pd{u}{r} &= \frac{1}{r} = \frac{1}{r}\pd{v}{\theta},\nonumber\\
+			\pd{v}{r} &= 0 = -\frac{1}{r}\pd{u}{\theta}. \nonumber
+		\end{align}
+
+		\item $z^{1/2}$:
+		\be
+			z^{1/2} = r^{1/2} e^{i\theta/2} = r^{1/2}\cos\frac{\theta}{2} + ir^{1/2}\sin\frac{\theta}{2} 
+			= u(r, \theta) + iv(r, \theta) \nonumber
+		\ee
+		Thus, following the definition of polar Cauchy-Riemann conditions:
+		\begin{align}
+			\pd{u}{r} &= \frac{1}{2}r^{-1/2}\cos\frac{\theta}{2} = \frac{1}{r}\pd{v}{\theta}, \nonumber\\
+			\pd{v}{r} &= \frac{1}{2}r^{-1/2}\sin\frac{\theta}{2} = -\frac{1}{r}\pd{u}{\theta}. \nonumber
+		\end{align}
+
+		\item $z^{1/3}$:
+		\be
+			z^{1/3} = r^{1/3} e^{i\theta/3} = r^{1/3}\cos\frac{\theta}{3} + ir^{1/3}\sin\frac{\theta}{3} 
+			= u(r, \theta) + iv(r, \theta) \nonumber
+		\ee
+		Thus
+		\begin{align}
+			\pd{u}{r} &= \frac{1}{3}r^{-2/3}\cos\frac{\theta}{3} = \frac{1}{r}\pd{v}{\theta}, \nonumber\\
+			\pd{v}{r} &= \frac{1}{3}r^{-2/3}\sin\frac{\theta}{3} = -\frac{1}{r}\pd{u}{\theta}. \nonumber
+		\end{align}		
+
+	\end{enumerate}
+	In all the three cases, $z\neq 0$, i.e. $r\neq 0$.
+
+	% --------------------------------------------------------------------------
+	\item Ex. 13:
+	\begin{enumerate}
+		\item $\tan(\tan^{-1}z) = z$
+
+		Firstly, we have the following definitions:
+		\begin{align}
+			\tan z      &\equiv \frac{1}{i}\frac{e^{iz}-e^{-iz}}{e^{iz}+e^{-iz}} 
+			            = \frac{1}{i}\frac{e^{2iz}-1}{e^{2iz}+1}, \nonumber\\
+			\tan^{-1} z &\equiv \frac{i}{2}\ln\left(\frac{i+z}{i-z}\right). \nonumber
+		\end{align}
+		It follows that
+		\be
+			\exp\left(2i\cdot\frac{i}{2}\ln\left(\frac{i+z}{i-z}\right)\right)
+			= \exp\left[-\ln\left(\frac{i+z}{i-z}\right)\right] \nonumber
+			= \frac{i-z}{i+z}.
+		\ee
+		Therefore,
+		\be
+			\tan(\tan^{-1}z) = \frac{1}{i}\left(\frac{\dfrac{i-z}{i+z}-1}{\dfrac{i-z}{i+z}+1}\right) = z.
+			\nonumber
+		\ee
+
+		\item $\log(e^z) = z + 2\pi ni$
+
+		Write $z=re^{i\theta}$, we have
+		\be
+			e^z = e^{re^{i\theta}} = \underbrace{e^{r\cos\theta}}_{R}\cdot e^{i\overbrace{\scriptstyle r\sin\theta}^\phi} 
+			    \equiv R\cdot e^{i\phi} \nonumber
+		\ee
+		With this identity, we can proceed to show that
+		\be
+			\log(e^z) = \log(R\cdot e^{i\phi}) = \log R + i\phi + 2\pi ni = r\cos\theta + ir\sin\theta + 2\pi ni = z + 2\pi ni.
+			\nonumber
+		\ee
+
+	\end{enumerate}
+
+	% --------------------------------------------------------------------------
+	\item Ex. 16:
+
+	Between the following integrals
+	\be
+		\mbox{a)}\,\,\,\int_{-1}^1 z^* dz,\hspace{1.5cm}
+		\mbox{b)}\,\,\,\int_0^i\sin 2z dz, \nonumber
+	\ee
+	the first integral does not make sense because $z^*$ is not analytic anywhere in the complex plane. Thus the value of
+	a) depends on the path of integration. In the textbook, it is already shown that along a unit circle $C$,
+	\be
+		\oint_C z^* dz = 2\pi i. \nonumber
+	\ee
+	Using this result, a) can be viewed as going from $x=-1$ to $x=1$ along either the {\it upper} unit circle or 
+	the {\it lower} unit circle, which gives the result of $-i\pi$ and $i\pi$ respectively. Moreover, if we just plug in
+	the definition of $z=x+iy$ and recognize that along the real axis $y=0$, $dy=0$, we get
+	\be
+		\int_{-1}^i z^* dz = \int_{-1}^1 x\,dx = 0. \nonumber
+	\ee
+	All these results just demonstrate that the integral in a) really is path-dependent.
+
+	It could be concluded that the integral in b) makes sense, and now we proceed to evaluate the integral.
+	Using the definition $z=x+iy$ and the complex sine function, we have
+	\be
+		\sin 2z\,dz = (\cosh 2y\sin 2x\,dx - \sinh 2y\cos 2x\,dy) + i(\cosh 2y\sin 2x\,dy + \sinh 2y\cos 2x\,dx) 
+		\label{eq:ex16integrand}
+	\ee
+	Since $x=0$ and $dx=0$ along the $y$-axis, it follows that
+	\be
+		\int_0^i\sin 2z\,dz = \int_0^1 -\sinh 2y\,dy = \frac{1}{2}(1-\cosh 2). 
+		\label{ex16:direct_integral}
+	\ee
+
+	Instead of taking the path from the origin to $(x,y)=(0,1)$ along the imaginary axis, we could compute the integral
+	from the origin to $(x,y)=(1,0)$ along the real axis ($OA$), then from $(1,0)$ to $(1,0)$ along the line $y=1-x$ ($AB$).
+	Let's do this.
+
+	On the first path $y=0$ and $dy=0$. So the integrand Eq.~(\ref{eq:ex16integrand}) becomes $\sin 2x$, thus
+	\be
+		\int_{OA} \sin 2z\,dz = \int_0^1\sin 2x\,dx  = \frac{1}{2}(1-\cos 2). \nonumber
+	\ee
+
+	Going from $(1,0)$ to $(0,1)$, we have $y=1-x$. This leads to
+	\begin{align}
+		\int_{AB} \sin 2z\,dz
+			=& \int_{AB} (\cosh 2y\sin 2x\,dx - \sinh 2y\cos 2x\,dy) + 
+			   i\int_{AB} (\cosh 2y\sin 2x\,dy + \sinh 2y\cos 2x\,dx) \nonumber\\
+			=& -\int_0^1 (\cosh 2y\sin 2(1-y)\,dy + \sinh 2y\cos 2(1-y)\,dy) \nonumber \\
+			 & + i\int_0^1 (\cosh 2y\sin 2(1-y)\,dy - \sinh 2y\cos 2(1-y)\,dy) \nonumber\\
+			=& -\frac{1}{2}\left[\vphantom{\int} \cosh 2y \cos 2(1-y)\right]_0^1 
+			   + \frac{i}{2}\left[\vphantom{\int} \sinh2y \sin 2(1-y)\right]_0^1 \nonumber\\
+			=& \frac{1}{2}(\cos 2 - \cosh 2). \nonumber
+	\end{align}
+
+	Finally,
+	\be
+		\int_0^i\sin 2z\,dz = \int_{OA}\sin 2z\,dz + \int_{AB}\sin 2z\,dz = \frac{1}{2}(1-\cosh 2),
+	\ee
+	in agreement with Eq.~(\ref{ex16:direct_integral}) as expected.
+
+\end{itemize}
+
+\end{document}
