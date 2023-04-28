@@ -10,6 +10,7 @@
 \newtheorem{thm}{Theorem}
 
 \newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\cint}[1]{\frac{1}{2\pi i}\oint_{#1}}
 %\newcommand{\dfrac}[2]{\displaystyle\frac{#1}{#2}}
 
 \begin{document}
@@ -312,6 +313,75 @@
 	\ee
 	The is a welcoming result which shows that Cauchy's integral formula can also be applied to complex
 	polynomials.
+
+
+	% --------------------------------------------------------------------------
+	\begin{figure}
+	\includegraphics[width=0.45\textwidth]{./figures/fig_ex20.pdf}
+	\caption{Contour for Exercise 20.}
+	\label{fig:ex20}
+	\end{figure}
+
+	\item Ex. 20:
+	We'd like to evaluate the following contour integral for an analytic function $f(z)$:
+	\be
+		I = \frac{1}{2\pi i}\oint_C \frac{f(z)}{(z-\alpha)(z-\beta)}dz, \nonumber
+	\ee
+	where $\alpha$ and $\beta$ are two distinct arbitrary points inside the contour $C$. We can choose $C$
+	to be a circle such that $\alpha$ is the center of $C$ and $z=r_0 e^{i\theta}$, as shown in Fig.~\ref{fig:ex20}.
+	In the figure, we choose the axis so that $\alpha$ and $\beta$ lie on the real axis. However, this arrangement
+	is really not necessary. 
+
+	In any case, we can add two circles $C_\alpha$ and $C_\beta$ around $\alpha$ and $\beta$ respectively, along
+	with two sets of opposite-traversing line segments joining the inner circles with $C$. Let's call the contour
+	as $C'$. Then we can write
+	\be
+		\cint{C'}\frac{f(z)}{(z-\alpha)(z-\beta)}dz = 
+			I + \cint{C_\alpha}\frac{f(z)}{(z-\alpha)(z-\beta)}dz
+			  + \cint{C_\beta}\frac{f(z)}{(z-\alpha)(z-\beta)}dz. \nonumber
+	\ee
+	The integral along $C'$ vanishes because now the integrand is analytic within the contour $C'$
+	For the second term on the right-hand side, we notice that the term 
+	\be
+		\frac{f(z)}{z-\beta} \nonumber
+	\ee
+	is analytic within $C_\alpha$, so the integral is given immediately by Cauchy's integral formula:
+	\be
+		\cint{C_\alpha}\frac{f(z)}{(z-\alpha)(z-\beta)}dz = -\frac{f(\alpha)}{\alpha-\beta}. \nonumber
+	\ee
+	Similarly for the last term, we have
+	\be
+		\cint{C_\beta}\frac{f(z)}{(z-\alpha)(z-\beta)}dz = -\frac{f(\beta)}{\beta-\alpha}. \nonumber
+	\ee
+	Therefore, it follows that
+	\be
+		\cint{C}\frac{f(z)}{(z-\alpha)(z-\beta)}dz = \frac{f(\alpha) - f(\beta)}{\alpha-\beta}.
+		\label{eq:ex20}
+	\ee
+
+	In order to deduce the Liouville's Theorem, we take Eq.~(\ref{eq:ex20}) and rewrite it as:
+	\be
+		f(\alpha) - f(\beta) = \frac{\alpha - \beta}{2\pi i}\oint_C \frac{f(z)}{(z-\alpha)(z-\beta)}dz. \nonumber
+	\ee
+	Now consider the norm of the left-hand side:
+	\begin{align}
+		\left|f(\alpha) - f(\beta)\right| 
+			&= \frac{|\alpha - \beta|}{2\pi}\left| \oint_C \frac{f(z)}{(z-\alpha)(z-\beta)}dz \right| \nonumber\\
+			&\leq \frac{|\alpha - \beta|}{2\pi} \oint_C \frac{|f(z)|}{|z-\alpha||z-\beta|}|dz|. \nonumber
+	\end{align}
+	By construction, $|z-\alpha| = r_0$, and $|dz|=r_0d\theta$. By assumption $f(z)$ is bounded, so $|f(z)| \leq M$.
+	We can also choose the radius of $C$ such that $|z-\beta| \geq r_0/2$, for example. Then it follows that
+	\be
+		|f(\alpha) - f(\beta)| 
+			\leq \frac{|\alpha - \beta|}{2\pi r_0} \frac{2M}{r_0}2\pi r_0
+			= \frac {2|\alpha - \beta|}{r_0}M. \nonumber
+	\ee
+	We can choose the radius of $C$ arbitarrily large, the right hand side of the above inequality tends to be zero
+	as $r_0\rightarrow\infty$. Thus
+	\be
+		|f(\alpha) - f(\beta)| = 0.
+	\ee
+	This result implies that $f(\alpha)=f(\beta)$ for arbitrary $\alpha$ and $\beta$. Thus $f(z)=\mbox{const.}$
 
 
 \end{itemize}
